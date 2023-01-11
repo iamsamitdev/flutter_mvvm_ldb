@@ -1,6 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm/models/moviesList/MoviesMain.dart';
+import 'package:flutter_mvvm/view/details/MovieDetailScreen.dart';
 import 'package:flutter_mvvm/view/home/HomeScreen.dart';
 import 'themes/AppContextExtension.dart';
 
@@ -21,7 +23,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: HomeScreen.id,
       routes: {
-        HomeScreen.id:(context) => HomeScreen()
+        HomeScreen.id:(context) => HomeScreen(),
+        MovieDetailsScreen.id:(context) => MovieDetailsScreen(ModalRoute.of(context)!.settings.arguments as Result)
       },
     );
   }

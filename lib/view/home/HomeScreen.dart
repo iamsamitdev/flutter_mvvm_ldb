@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_declarations, use_key_in_widget_constructors, prefer_const_constructors, avoid_unnecessary_containers, avoid_print, sort_child_properties_last, unnecessary_new
 
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm/data/remote/network/BaseApiService.dart';
 import 'package:flutter_mvvm/data/remote/response/Status.dart';
+import 'package:flutter_mvvm/utils/constant.dart';
+import 'package:flutter_mvvm/view/details/MovieDetailScreen.dart';
 import 'package:flutter_mvvm/view/widget/MyTextView.dart';
 import 'package:flutter_mvvm/view_model/home/MoviesListVM.dart';
 import 'package:provider/provider.dart';
@@ -68,9 +71,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _getMovieListItem(Result item) {
     return Card(
       child: ListTile(
+        contentPadding: EdgeInsets.all(15),
         leading: ClipRRect(
           child: Image.network(
-            item.posterPath ?? "",
+            imageBaseUrl+item.posterPath.toString(),
             errorBuilder: (context, error, stackTrace) {
               return new Image.asset('assets/images/img_error.png');
             },
@@ -92,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         onTap: () {
-          //
+          Navigator.pushNamed(context, MovieDetailsScreen.id, arguments: item);
         },
       ),
       elevation: context.resources.dimension.lightElevation,
